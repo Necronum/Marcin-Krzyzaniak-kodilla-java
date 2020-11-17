@@ -46,9 +46,9 @@ public class CollectionTestSuite {
         //Given
         OddNumbersExterminator numbers = new OddNumbersExterminator();
         List<Integer> integerList = new ArrayList<>(Arrays.asList(1,2,3,4,5,6));
+        List<Integer> correctResult = new ArrayList<>(Arrays.asList(2,4,6));
         //When
         List<Integer> result = numbers.exterminate(integerList);
-        List<Integer> correctResult = new ArrayList<>(Arrays.asList(2,4,6));
         System.out.println("Testing with: " + result);
         //Then
         Assertions.assertEquals(correctResult, result);

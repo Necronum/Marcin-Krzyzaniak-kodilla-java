@@ -7,11 +7,11 @@ public class TestingMain {
         System.out.println("Moduł 6. wprowadzenie do testowania oprogramowania");
 
         System.out.println("\n Sprawdzenie poprawności działania klasy Calculator");
-        Calculator calculator = new Calculator(20,30);
-        int addResult = calculator.add();
-        int subResult = calculator.substract();
+        Calculator calculator = new Calculator();
+        int addResult = calculator.add(20, 30);
+        int subResult = calculator.substract(40, 10);
 
-        if ((addResult == 50) && (subResult == -10)){
+        if ((addResult == 50) && (subResult == 30)){
             System.out.println("Calculator test OK");
         } else {
             System.out.println("Calculator has error!");
