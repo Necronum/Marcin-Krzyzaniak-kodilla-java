@@ -19,9 +19,11 @@ public class Forum {
         usersList.add(new ForumUser(4, "kitty666", 'F',
                 LocalDate.of(1996, 8, 15), 1));
         usersList.add(new ForumUser(5, "johns", 'M',
-                LocalDate.of(2000, 12, 14), 2));
+                LocalDate.of(2000, 11, 19), 2));
         usersList.add(new ForumUser(6, "forumking", 'M',
-                LocalDate.of(1995, 1, 1), 999));
+                LocalDate.of(2000, 11, 20), 999));
+        usersList.add(new ForumUser(7, "forummaster", 'M',
+                LocalDate.of(1984, 11, 20), 1));
     }
 
     public List<ForumUser> getList() {

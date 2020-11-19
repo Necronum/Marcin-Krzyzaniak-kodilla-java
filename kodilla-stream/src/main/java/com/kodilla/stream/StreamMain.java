@@ -60,7 +60,8 @@ public class StreamMain {
         Forum theForumUser = new Forum();
         Map<Integer, ForumUser> theResultMapOfUsers = theForumUser.getList().stream()
                 .filter(user -> user.getSex() == 'M')
-                .filter(user -> (LocalDate.now().getYear() - user.getBirthDate().getYear()) >20 )
+                .filter(user -> ((LocalDate.now().getYear()*10000+(LocalDate.now().getMonthValue()*100)+(LocalDate.now().getDayOfMonth())) )
+                        - ((user.getBirthDate().getYear()*10000)+(user.getBirthDate().getMonthValue()*100)+(user.getBirthDate().getDayOfMonth())) >=200000)
                 .filter(user -> user.getPostsNumber() >= 1)
                 .collect(Collectors.toMap(ForumUser::getUserId, user -> user));
 
