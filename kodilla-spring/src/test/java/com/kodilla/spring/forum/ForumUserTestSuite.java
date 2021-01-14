@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ForumUserTestSuite {
     @Test
     void testGerUsername(){
-        //Given
+        //Givengit ad
         ApplicationContext context =
                 new AnnotationConfigApplicationContext("com.kodilla.spring.forum");
-        ForumUser forumUser = new ForumUser();
+        ForumUser forumUser = context.getBean(ForumUser.class);
 
         //When
         String username = forumUser.getUsername();
