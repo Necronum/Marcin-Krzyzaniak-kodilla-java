@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ForumUserTestSuite {
     @Test
     void testGerUsername(){
-        //Givengit ad
+        //Give
         ApplicationContext context =
                 new AnnotationConfigApplicationContext("com.kodilla.spring.forum");
         ForumUser forumUser = context.getBean(ForumUser.class);
