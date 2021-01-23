@@ -54,6 +54,9 @@ public class Bigmac {
                     break;
                 }
             }
+            if (ingredients.isEmpty()){
+                ingredient = true;
+            }
             if (!ingredient){
                 throw new IllegalStateException("In Your burgers is ingredient that we don't have - please reconsider Your choice");
             }
