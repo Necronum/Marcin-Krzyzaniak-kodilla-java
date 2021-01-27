@@ -52,7 +52,7 @@ class DbManagerTestSuite {
                 "FROM USERS U\n" +
                 "JOIN POSTS P ON U.ID = P.USER_ID\n" +
                 "GROUP BY USER_ID\n" +
-                "HAVING COUNT(*) > 1";
+                "HAVING COUNT(*) > 2";
         Statement statement = dbManager.getConnection().createStatement();
         ResultSet rs = statement.executeQuery(sqlQuery);
         //Then
@@ -65,6 +65,6 @@ class DbManagerTestSuite {
         }
         rs.close();
         statement.close();
-        assertEquals(2, counter);
+        assertEquals(1, counter);
     }
 }
