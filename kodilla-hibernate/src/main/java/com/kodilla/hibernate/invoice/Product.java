@@ -1,7 +1,9 @@
+
 package com.kodilla.hibernate.invoice;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,7 @@ import java.util.List;
 public class Product {
     private int id;
     private String name;
-    private List<Item> items = new ArrayList<>();
+    List<Item> items = new ArrayList<>();
 
     public Product() {
     }
@@ -22,7 +24,7 @@ public class Product {
     @Id
     @GeneratedValue
     @NotNull
-    @Column(name = "PRODUCT_ID", unique = true)
+    @Column(name = "ID", unique = true)
     public int getId() {
         return id;
     }
@@ -31,7 +33,6 @@ public class Product {
         this.id = id;
     }
 
-    @NotNull
     @Column(name = "NAME")
     public String getName() {
         return name;
@@ -44,7 +45,6 @@ public class Product {
     @OneToMany(
             targetEntity = Item.class,
             mappedBy = "product",
-            orphanRemoval = true,
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )

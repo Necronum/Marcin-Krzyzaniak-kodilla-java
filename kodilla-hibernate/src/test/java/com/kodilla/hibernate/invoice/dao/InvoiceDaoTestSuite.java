@@ -3,61 +3,49 @@ package com.kodilla.hibernate.invoice.dao;
 import com.kodilla.hibernate.invoice.Invoice;
 import com.kodilla.hibernate.invoice.Item;
 import com.kodilla.hibernate.invoice.Product;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootTest
 public class InvoiceDaoTestSuite {
     @Autowired
     private InvoiceDao invoiceDao;
-
     @Test
     void testInvoiceDaoSave(){
         //Given
-        Product product1 = new Product("Apple");
-        Product product2 = new Product("Banana");
-        Item item1 = new Item(new BigDecimal(10), 100, new BigDecimal(1000));
-        Item item2 = new Item(new BigDecimal(5), 3000, new BigDecimal(1500));
-        Item item3 = new Item(new BigDecimal(25), 1000, new BigDecimal(2500));
-        Invoice invoice1 = new Invoice("F001");
-        Invoice invoice2 = new Invoice("F002");
+        Product product1 = new Product("tv");
 
-        item1.setInvoice(invoice2);
-        item2.setInvoice(invoice1);
-        item3.setInvoice(invoice2);
-
-        item1.setProduct(product1);
-        item2.setProduct(product2);
-        item3.setProduct(product1);
-
-        product1.getItems().add(item1);
-        product1.getItems().add(item3);
-        product2.getItems().add(item2);
-
-        invoice1.getItems().add(item2);
-        invoice2.getItems().add(item1);
-        invoice2.getItems().add(item3);
+        Item item1 = new Item(product1, new BigDecimal(1000),2,new BigDecimal(500));
+        Item item2 = new Item(product1, new BigDecimal(700),2,new BigDecimal(500));
+        Item item3 = new Item(product1, new BigDecimal(50),2,new BigDecimal(40));
+        Item item4 = new Item(product1, new BigDecimal(20),2,new BigDecimal(10));
+        List<Item> itemList = new ArrayList<>();
+        itemList.add(item1);
+        itemList.add(item2);
+        itemList.add(item3);
+        itemList.add(item4);
+        Invoice invoice = new Invoice("1",itemList);
+        item1.setInvoice(invoice);
+        item2.setInvoice(invoice);
+        item3.setInvoice(invoice);
+        item4.setInvoice(invoice);
+        product1.setItems(itemList);
 
         //When
-        invoiceDao.save(invoice1);
-        int invoice1Id = invoice1.getId();
-        invoiceDao.save(invoice2);
-        int invoice2Id = invoice2.getId();
-
+        invoiceDao.save(invoice);
+        int id = invoice.getId();
         //Then
-        assertNotEquals(0, invoice1Id);
-        assertNotEquals(0, invoice2Id);
+        Assertions.assertEquals("1", invoice.getNumber() );
+        Assertions.assertEquals(4, invoice.getItems().size() );
 
         //CleanUp
-        try{
-            invoiceDao.deleteById(invoice1Id);
-            invoiceDao.deleteById(invoice2Id);
-        } catch (Exception e){
-            //do nothing
-        }
+        invoiceDao.deleteById(id);
     }
+
 }

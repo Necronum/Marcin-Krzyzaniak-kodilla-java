@@ -1,7 +1,8 @@
 package com.kodilla.hibernate.invoice;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity
@@ -17,7 +18,8 @@ public class Item {
     public Item() {
     }
 
-    public Item(BigDecimal price, int quantity, BigDecimal value) {
+    public Item(Product product, BigDecimal price, int quantity, BigDecimal value) {
+        this.product = product;
         this.price = price;
         this.quantity = quantity;
         this.value = value;
@@ -26,7 +28,7 @@ public class Item {
     @Id
     @GeneratedValue
     @NotNull
-    @Column(name = "ITEM_ID", unique = true)
+    @Column(name = "ID", unique = true)
     public int getId() {
         return id;
     }
@@ -36,17 +38,16 @@ public class Item {
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "PRODUCT_ID")
+    @JoinColumn(name = "PRODUCTS_ID")
     public Product getProduct() {
         return product;
     }
+
 
     public void setProduct(Product product) {
         this.product = product;
     }
 
-    @NotNull
-    @Column(name = "PRICE")
     public BigDecimal getPrice() {
         return price;
     }
@@ -55,8 +56,6 @@ public class Item {
         this.price = price;
     }
 
-    @NotNull
-    @Column(name = "QUANTITY")
     public int getQuantity() {
         return quantity;
     }
@@ -65,8 +64,6 @@ public class Item {
         this.quantity = quantity;
     }
 
-    @NotNull
-    @Column(name = "VALUE")
     public BigDecimal getValue() {
         return value;
     }
@@ -75,8 +72,8 @@ public class Item {
         this.value = value;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "INVOICE_ID")
+    @ManyToOne
+    @JoinColumn(name = "INVOICES_ID")
     public Invoice getInvoice() {
         return invoice;
     }

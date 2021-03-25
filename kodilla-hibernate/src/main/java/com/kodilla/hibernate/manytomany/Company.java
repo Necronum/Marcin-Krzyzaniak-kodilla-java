@@ -1,13 +1,21 @@
 package com.kodilla.hibernate.manytomany;
 
+import org.springframework.stereotype.Service;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 @NamedNativeQuery(
         name = "Company.retrieveCompanyNameBySubstring",
         query = "select * from companies where substring(company_name,1,3) LIKE :COMPANY_SUBSTRING",
+        resultClass = Company.class
+)
+@NamedNativeQuery(
+        name = "Company.retrieveCompanyByPartOfTheName",
+        query = "select * from companies where company_name LIKE '%ter%'",
         resultClass = Company.class
 )
 @Entity

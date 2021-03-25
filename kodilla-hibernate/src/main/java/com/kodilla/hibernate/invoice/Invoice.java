@@ -1,7 +1,8 @@
 package com.kodilla.hibernate.invoice;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +11,14 @@ import java.util.List;
 public class Invoice {
     private int id;
     private String number;
-    private List<Item> items = new ArrayList<>();
+    List<Item> items = new ArrayList<>();
 
     public Invoice() {
     }
 
-    public Invoice(String number) {
+    public Invoice(String number, List<Item> items) {
         this.number = number;
+        this.items = items;
     }
 
     @Id
@@ -31,7 +33,6 @@ public class Invoice {
         this.id = id;
     }
 
-    @NotNull
     @Column(name = "NUMBER")
     public String getNumber() {
         return number;
@@ -44,7 +45,6 @@ public class Invoice {
     @OneToMany(
             targetEntity = Item.class,
             mappedBy = "invoice",
-            orphanRemoval = true,
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
@@ -55,4 +55,5 @@ public class Invoice {
     public void setItems(List<Item> items) {
         this.items = items;
     }
+
 }
