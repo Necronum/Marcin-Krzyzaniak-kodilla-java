@@ -66,7 +66,7 @@ public class CrudAppTestSuite {
         WebDriver driverTrello = WebDriverConfig.getDriver(WebDriverConfig.CHROME);
         driverTrello.get(TRELLO_URL);
 
-        driverTrello.findElement(By.id("user")).sendKeys("nick");
+        driverTrello.findElement(By.id("user")).sendKeys("login");
         driverTrello.findElement(By.id("password")).sendKeys("password");
         WebElement el = driverTrello.findElement(By.id("login"));
         el.submit();
@@ -74,10 +74,10 @@ public class CrudAppTestSuite {
 
         driverTrello.findElement(By.id("password")).sendKeys("password");
         driverTrello.findElement(By.id("login-submit")).submit();
-        Thread.sleep(6000);
+        Thread.sleep(10000);
 
-        driverTrello.findElements(By.xpath("//a[@class=\"board-title\"]")).stream()
-                .filter(aHref -> aHref.findElements(By.xpath(".//span[@title=\"Kodilla Application\"]")).size() > 0)
+        driverTrello.findElements(By.xpath("//a[contains (@class, 'board-tile')]")).stream()
+                .filter(aHref -> aHref.findElements(By.xpath(".//div[@title=\"Kodilla Application\"]")).size() > 0)
                 .forEach(aHref -> aHref.click());
         Thread.sleep(6000);
 
